@@ -17,7 +17,34 @@ namespace Evaluation_Manager
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+
+            if(username == " "|| password == " ")
+            {
+                MessageBox.Show("Popunite sva polja","Pogreška",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+            }
+            else if(username == "nastavnik" && password == "test")
+            {
+                Hide();
+                FrmStudents frmStudents = new FrmStudents();
+                frmStudents.ShowDialog();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Korisničko ime ili lozinka nisu ispravni", "Neuspjela prijava", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
         {
 
         }
