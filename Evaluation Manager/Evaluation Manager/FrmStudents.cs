@@ -31,7 +31,7 @@ namespace Evaluation_Manager
         }
         private void ShowStudents()
         {
-            List<Student> students = StudentRepository.GetStudents();
+            List<Activity> students = StudentRepository.GetStudents();
             dgvStudents.DataSource = students;
 
             dgvStudents.Columns["Id"].DisplayIndex = 0;

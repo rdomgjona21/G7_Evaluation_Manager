@@ -48,6 +48,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(26, 34);
             this.comboBox1.Name = "comboBox1";
@@ -68,6 +69,7 @@
             // 
             this.txtMinForSignature.Location = new System.Drawing.Point(329, 35);
             this.txtMinForSignature.Name = "txtMinForSignature";
+            this.txtMinForSignature.ReadOnly = true;
             this.txtMinForSignature.Size = new System.Drawing.Size(96, 20);
             this.txtMinForSignature.TabIndex = 2;
             // 
@@ -75,6 +77,7 @@
             // 
             this.txtMinForGrade.Location = new System.Drawing.Point(431, 35);
             this.txtMinForGrade.Name = "txtMinForGrade";
+            this.txtMinForGrade.ReadOnly = true;
             this.txtMinForGrade.Size = new System.Drawing.Size(92, 20);
             this.txtMinForGrade.TabIndex = 3;
             // 
@@ -91,6 +94,7 @@
             // 
             this.txtTeacher.Location = new System.Drawing.Point(245, 333);
             this.txtTeacher.Name = "txtTeacher";
+            this.txtTeacher.ReadOnly = true;
             this.txtTeacher.Size = new System.Drawing.Size(100, 20);
             this.txtTeacher.TabIndex = 5;
             // 
@@ -98,6 +102,7 @@
             // 
             this.txtEvaluationDate.Location = new System.Drawing.Point(351, 333);
             this.txtEvaluationDate.Name = "txtEvaluationDate";
+            this.txtEvaluationDate.ReadOnly = true;
             this.txtEvaluationDate.Size = new System.Drawing.Size(107, 20);
             this.txtEvaluationDate.TabIndex = 6;
             // 
