@@ -11,9 +11,9 @@ namespace Evaluation_Manager.Repositories
 {
     public class StudentRepository
     {
-        public static Activity GetStudent(int id)
+        public static Student GetStudent(int id)
         {
-            Activity student = null;
+            Student student = null;
             string sql = $"SELECT * FROM Students WHERE Id = {id}";
             DB.OpenConnection();
             var reader = DB.GetDataReader(sql);
@@ -27,16 +27,16 @@ namespace Evaluation_Manager.Repositories
             return student;
         }
 
-        public static List<Activity> GetStudents() 
+        public static List<Student> GetStudents() 
         {   
-            List<Activity> students = new List<Activity>();
+            List<Student> students = new List<Student>();
             string sql = "SELECT * FROM Students";
             DB.OpenConnection();    
             var reader = DB.GetDataReader(sql); 
 
             while(reader.Read()) 
             {
-                Activity student = CreateObject(reader);
+                Student student = CreateObject(reader);
                 students.Add(student);
             }
             reader.Close();
@@ -46,14 +46,14 @@ namespace Evaluation_Manager.Repositories
         
         }
 
-        private static Activity CreateObject(SqlDataReader reader)
+        private static Student CreateObject(SqlDataReader reader)
         {
             int id = int.Parse(reader["Id"].ToString());
             string firstName = reader["FirstName"].ToString();
             string lastName = reader["LastName"].ToString();
             int.TryParse(reader["Grade"].ToString(), out int grade);
 
-            var student = new Activity
+            var student = new Student
             {
                 Id = id,
                 FirstName = firstName,
