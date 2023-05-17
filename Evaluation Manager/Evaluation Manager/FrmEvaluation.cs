@@ -14,11 +14,12 @@ namespace Evaluation_Manager
 {
     public partial class FrmEvaluation : Form
     {
-        private Student student;
+        public Student selectedStudent { get; }
         public FrmEvaluation(Student selectedStudent)
         {
             InitializeComponent();
-            student = selectedStudent;
+            this.selectedStudent = selectedStudent;
+            this.Text = $"{selectedStudent.FirstName}{selectedStudent.LastName}";
         }
 
         private void FrmEvaluation_Load(object sender, EventArgs e)
@@ -26,10 +27,11 @@ namespace Evaluation_Manager
             SetFormText();
             var activities = ActivityRepository.GetActivities();
             cboActivities.DataSource = activities;
+
         }
         private void SetFormText() 
         {
-            Text = student.FirstName + " " + student.LastName;
+            Text = selectedStudent.FirstName + " " + selectedStudent.LastName;
         }
 
         private void txtTeacher_TextChanged(object sender, EventArgs e)
@@ -44,13 +46,40 @@ namespace Evaluation_Manager
             txtMinForGrade.Text = currentActivity.MinPointsForGrade + "/" + currentActivity.MaxPoints;
             txtMinForSignature.Text = currentActivity.MinPointsForSignature + "/" + currentActivity.MaxPoints;
 
+           
+
             numPoints.Minimum = 0;
             numPoints.Maximum = currentActivity.MaxPoints;
+
+            var evaluation = EvaluationRepository.GetEvaluation(selectedStudent, currentActivity);
+            if (evaluation != null)
+            {
+                txtTeacher.Text = evaluation.Evaluator.ToString();
+                txtEvaluationDate.Text = evaluation.EvaluationDateTime.ToString();
+                numPoints.Value = evaluation.Points;
+            }
+            else
+            {
+                txtTeacher.Text = FrmLogin.LoggedTeacher.ToString();
+                txtEvaluationDate.Text = "-";
+                numPoints.Value = 0;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var activity = cboActivities.SelectedItem as Activity;
+            var teacher = FrmLogin.LoggedTeacher;
+
+            int points = (int)numPoints.Value;
+
+            teacher.PerformEvaluation(selectedStudent,activity, points);
+            this.Close();
         }
     }
 }
